@@ -1,0 +1,26 @@
+{
+  "name": "my-awesome-project",
+  "version": "1.0.0",
+  "description": "My-Awesome-Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tyson1Nelson/my-awesome-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tyson1Nelson/my-awesome-project/issues"
+  },
+  "homepage": "https://github.com/Tyson1Nelson/my-awesome-project#readme",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "mongoose": "^4.8.5",
+    "morgan": "^1.8.1"
+  }
+}
