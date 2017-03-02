@@ -1,0 +1,110 @@
+<div id="partyPage">
+    <div id="addPartyBtn" class="row container-fluid">
+      <header class="text-center">
+          <h1>Welcome {{ user[0].firstName }}</h1>
+      </header>
+        <div class="col-xs-12 text-center">
+            <button class="btn btn-primary" ng-model="addPartyBtn" ng-disabled="!loggedIn" data-toggle="modal" data-target="#myModal">Add A Party</button>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Party!!!</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <form>
+                            <div class="col col-xs-12">
+                                <div class="col col-xs-6 col-sm-6">
+                                    <select class="form-control" placeholder="Type of Party" ng-model="post.typeOfParty">
+                                        <option>Other</option>
+                                        <option>House</option>
+                                        <option>Club</option>
+                                        <option>Private</option>
+                                        <option>Birthday</option>
+                                        <option>Public</option>
+                                        <option>Religious</option>
+                                        <option>Beach</option>
+                                        <option>Bar</option>
+                                    </select>
+                                </div>
+                                <div class="col col-xs-6 col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Host Of Party" ng-model="post.host">
+                                </div>
+
+                                <div class="col col-xs-6 col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Address" ng-model="post.location.address">
+                                </div>
+                                <div class="col col-xs-6 col-sm-6">
+                                    <input type="text" class="form-control" placeholder="City" ng-model="post.location.city">
+                                </div>
+                                <div class="col col-xs-6 col-sm-6">
+                                    <input type="text" class="form-control" placeholder="State" ng-model="post.location.state">
+                                </div>
+                                <div class="col col-xs-6 col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Zip Code" ng-model="post.location.zip">
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <input type="datetime-local" class="form-control" name="partyTime" ng-model="post.dateAndTime">
+                                </div>
+                                <div class="col-xs-6" ng-show="post.admission">
+                                    <div id="admission" class="col-xs-12 input-group text-center">
+                                        <div class="input-group-addon">$</div>
+                                        <input type="number" class="form-control" id="exampleInputAmount" placeholder="Amount" ng-model="post.admissionAmount" min="0">
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="col col-xs-6 form-group">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" ng-model="post.alcohol" value="false"> Alcohol
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col col-xs-6 form-group">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" ng-model="post.admission" value=false> Admission
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 text-center">
+                                    <button class="btn btn-success" ng-click="addParty(post)" data-dismiss="modal" ng-disabled="!post.location.state || !post.location.city">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row container" id="partyResults">
+        <div class="col-sm-6 col-md-4" ng-repeat="party in parties | orderBy: 'dateAndTime' track by $index">
+            <div id="indParties">
+                <h3> {{ party.typeOfParty }} Party</h3>
+                <p> {{ party.location.address }} {{ party.location.city }}, {{ party.location.state }}.</p>
+                <p>Alcohol: {{ party.alcohol }} </p>
+                <p>Admission: {{ party.admission }} </p>
+                <p>Posted By: {{ party.personPosting }} </p>
+                <p>Posted By: {{ party.firstName }} </p>
+                <label>
+                    <button class="btn btn-primary" ng-model="goingBtn" ng-click="going(party, userId, $index)" ng-disabled="goingBtn"><span ng-hide="goingBtn">Count Me In </span><span ng-show="goingBtn">Not logged in</span></button>
+                    
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

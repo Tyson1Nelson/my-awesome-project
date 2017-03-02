@@ -1,0 +1,60 @@
+#partyResults {
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 40px;
+    padding-bottom: 40px;
+}
+
+#partyPage {
+    background-image: url("http://www.lovethispic.com/uploaded_images/21688-It-s-Party-Time.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#indParties {
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#indParties:hover {
+    box-shadow: 0px 0px 20px 8px #fdfdfd;
+}
+
+#addPartyBtn {
+    padding-top: 20px;
+}
+
+#addPartyBtn button {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#addPartyBtn button:hover {
+    -webkit-animation: color_change 3s infinite alternate;
+    -moz-animation: color_change 3s infinite alternate;
+    -ms-animation: color_change 3s infinite alternate;
+    -o-animation: color_change 3s infinite alternate;
+    animation: color_change 3s infinite alternate;
+}
+
+@keyframes color_change {
+    0% {
+        color: white;
+        background-color: limegreen;
+    }
+    50% {
+        /*        color:*/
+        color: white;
+        background-color: dodgerblue;
+    }
+    100% {
+        /*        color:*/
+        color: blue;
+        background-color: yellow;
+    }
+}

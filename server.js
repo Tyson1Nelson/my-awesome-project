@@ -6,10 +6,16 @@ var mongoose = require("mongoose");
 var port = process.env.PORT || 8000;
 var path = require("path");
 var booze = require("./routes/boozeRoute")
+var user = require("./routes/userRoute")
+var party = require("./routes/partyRoute")
+
 
 app.use(bodyParser.json());
+app.use("/user", user);
+app.use("/party", party);
 app.use("/boozer", booze);
 app.use(express.static(path.join(__dirname,"public")));
+
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/booze", function (err) {
     if(err) throw err;
