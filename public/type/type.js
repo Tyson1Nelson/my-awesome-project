@@ -1,74 +1,56 @@
 angular.module("MyApp")
 
-.controller("TypeController", ["$scope", "PartyService", "$routeParams", function ($scope, PartyService, $routeParams) {
+.controller("TypeController", ["$scope", "PartyService", "$routeParams", "$location", function ($scope, PartyService, $routeParams, $location) {
 
     $scope.user = PartyService.activeUser;
     $scope.parties = [];
     $scope.goingBtn = false;
-    
 
     if ($scope.user.length > 0) {
-        $scope.userId = $scope.user[0]._id;
+        $scope.userId = $scope.user[0];
         $scope.loggedIn = true;
     } else {
         $scope.userId = "";
         $scope.loggedIn = false;
+        $scope.goingBtn = true;
     }
 
     $scope.post = {
-        personPosting: $scope.userId,
+        personPosting: $scope.userId.firstName,
         typeOfParty: "Other",
         alcohol: false,
-        admission: false
+        admissionAmount: 0,
+        location: {
+            state: "UT"
+        }
     };
+    console.log($scope.userId);
     $scope.partyInput = false;
 
-    console.log($scope.user);
+    $scope.comments = function (partyInfo, comments, index) {
+        console.log(comments);
+        if ($scope.userId !== "" && comments !== undefined) {
+            $scope.partyComment = '';
+            if (comments.length > 0) {
+                partyInfo.comments.push(comments + "\n  - by user " + $scope.userId.username);
+                PartyService.addComment(partyInfo, $scope.userId);
+            }
+        }
+    };
+
+    PartyService.getParty().then(function (response) {
+        $scope.parties = response;
+    });
 
     $scope.addParty = function (post) {
         console.log(post);
         PartyService.addPartyInfo(post).then(function (response) {
-            console.log(response)
-            $scope.parties.push(response);
+            $scope.parties.push(response.data);
         })
     };
-    
-    $scope.going = function (party, user, index) {
-        if (user.length > 0) {
-            PartyService.editPartyInfo(party, $scope.userId).then(function (response) {
-                console.log(response);
-            })
-        } else {
-            $scope.goingBtn = true;
-        }
-    };
 
-    PartyService.getUsers().then(function (response) {
-        console.log(response.data); 
-        console.log($scope.parties);
-        if ($scope.parties.personPosting === response.data){
-            
-        }
-    })
+    $scope.signIn = function () {
+        $location.path("/home");
+    }
 
-    PartyService.getParty().then(function (response) {
-        $scope.parties = response;
-        response.forEach(function(data){
-            console.log(data);
-            if(data.personPosting === $scope.userId){
-                console.log("we have matches")
-                console.log($scope.user[0].username);
-                $scope.parties.push($scope.user[0].firstName) ;
-                console.log($scope.parties);
-                
-                
-            }
-        })
-        console.log(response);
-    });
-
-    //    PartyService.getInfo().then(function (response) {
-    //        $scope.name = response.data
-    ////        console.log($scope.name);
-    //    })
 }])

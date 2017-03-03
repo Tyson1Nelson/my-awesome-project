@@ -1,53 +1,17 @@
-<header>
+<header class="text-center">
     <h1>Welcome to the Party Finder App</h1>
 </header>
 
-<div class="row container">
+<div class="row container" id="welcomePg">
     <form class="form-group">
-        <div class="col col-xs-4">
+        <div class="col col-xs-12">
             <input type="text" class="form-control" placeholder="User Name" ng-model="user.username">
         </div>
-        <div class="col col-xs-4">
+        <div class="col col-xs-12">
             <input type="text" class="form-control" placeholder="Password" ng-model="user.password">
         </div>
-        <div class="col col-xs-4">
-            <!--         <input type="text" class="form-control" ng-model="">-->
+        <div class="col col-xs-12 text-center">
+            <button class="btn btn-success" ng-click="getUser(user)" ng-disabled="form">submit</button>
         </div>
-        <button class="btn btn-success" ng-click="getUser(user)" ng-disabled="form">submit</button>
     </form>
 </div>
-<!--
-    <p ng-repeat="type in name"><a href="#/type"></a>  </p>
-    <div class="row">
-        <div class="col col-xs-4" ng-model="type.vodka">
-            <h3>Vodka</h3>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoREhhHw7vH_QQJ0NjEj6sZqMuwUx4G2SreMPO4TFAg0fdvRpW" alt="" height="300px">
-        </div>
-        <div class="col col-xs-4">
-           <h3>Rum</h3>
-            <img src="http://www.mendaily.com/wp-content/uploads/2012/11/Bacardi-151-Bottle.jpg" alt="" height="300px"></div>
-        <div class="col col-xs-4" ng-model="type.whiskey" ng-click="getInfo()">
-            <h3>Whiskey</h3>
-            <img src="http://esq.h-cdn.co/assets/cm/15/05/54cb44cd2daa1_-_esq-jack-daniels-whiskey-030810-lg-96071862.jpg" alt="" height="300px">
-        </div>
-        <div class="col col-xs-4" ng-model="type.tequila">
-            <h3>Tequila</h3>
-            <img src="http://finedininglovers.cdn.crosscast-system.com/ImageAlbum/8238/original_patron.gold.dagger.bottle.jpg" alt="" height="300px">
-        </div>
-        <div class="col col-xs-4" ng-model="type.gin">
-            <h3>Gin</h3>
-            <img src="http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/iStock_000063538393_Small.jpg" alt="" height="300px">
-        </div>
-        <a href="#/type/wine"><div class="col col-xs-4" ng-model="type.wine">
-            <h3>Wine</h3>
-            <img src="http://cliparts.co/cliparts/8T6/5Gj/8T65GjKyc.jpg" alt="" height="300px">
-        </div></a>
-        <div class="col col-xs-4" ng-model="type.beer">
-            <h3>Beer</h3>
-            <img src="https://hips.hearstapps.com/cos.h-cdn.co/assets/cm/14/25/53a042aaec6dd_-_budweiser-beer-mdn.jpg" alt="" height="300px">
-        </div>
-        <div class="col col-xs-4">
-            <h3></h3>
-            <img src="" alt="" height="300px">
-        </div>
-    </div>-->

@@ -7,19 +7,10 @@ angular.module("MyApp")
     var login = "/user/login";
     var party = "/party/";
     var boozer = "/boozer";
-    var user = "/user"
+    var user = "/user";
+    var date = new Date();
 
     this.activeUser = [];
-
-    //    this.getUser = function (user){
-    //        return $http.post(url + login, user).then(function(response){
-    //            if(response.status !== 500){
-    //                return response.data;
-    //            } else {
-    //                alert("user name or password not valid");
-    //            }
-    //        });
-    //    }
 
     this.getUser = function (person) {
         return $http.get(url + user).then(function (response) {
@@ -36,38 +27,35 @@ angular.module("MyApp")
         })
     }
     this.getUsers = function () {
-        return $http.get(url + user);
+        return $http.get(url + user).then(function(response){
+            var singleUser = response.data;
+            self.filter(singleUser);
+        })
     }
-
+    
     this.getParty = function () {
         return $http.get(url + party).then(function (response) {
+            console.log(date);
             var party = response.data;
             return party;
         });
     }
-
-    this.addPartyInfo = function (input) {
-        return $http.post(url + party, input).then(function (response) {
-
+    this.filter = function(items){
+        items.forEach(function(item){
+            return item;
         })
-        console.log(response);
     }
 
-    this.editPartyInfo = function (input, personId) {
-        return $http.put(url + party + input._id, {
-            peopleGoing: personId
-        }).then(function (response) {
-            console.log("response");
-            if (personId.length > 0) {
-                var party = response.data;
-                return party;
-            } else {
-                return false;
-            };
-        });
+    this.addPartyInfo = function (input) {
+        return $http.post(url + party, input)
+    }
 
+    this.addComment = function (input, person) {
+        return $http.put(url + party + input._id, input);
     };
-
+    this.deletParty = function(){
+       return $http.delete(url + party._id)
+    }
 
     this.editInfo = function (input) {
         return $http.get(url + party, input)

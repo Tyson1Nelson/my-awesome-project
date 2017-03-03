@@ -1,9 +1,14 @@
 <div id="partyPage">
-    <div id="addPartyBtn" class="row container-fluid">
-      <header class="text-center">
-          <h1>Welcome {{ user[0].firstName }}</h1>
-      </header>
+
+    <div id="addPartyHeader" class="row container-fluid">
+
+        <header class="text-center">
+            <h1>Welcome {{ user[0].firstName }}</h1>
+        </header>
         <div class="col-xs-12 text-center">
+            <div class="col-xs-6" ng-show="goingBtn">
+                <button id="signIn" class="btn btn-success" ng-click="signIn()">Sign In</button>
+            </div>
             <button class="btn btn-primary" ng-model="addPartyBtn" ng-disabled="!loggedIn" data-toggle="modal" data-target="#myModal">Add A Party</button>
         </div>
     </div>
@@ -45,7 +50,7 @@
                                     <input type="text" class="form-control" placeholder="City" ng-model="post.location.city">
                                 </div>
                                 <div class="col col-xs-6 col-sm-6">
-                                    <input type="text" class="form-control" placeholder="State" ng-model="post.location.state">
+                                    <input type="text" class="form-control" placeholder="State" ng-model="post.location.state" disabled>
                                 </div>
                                 <div class="col col-xs-6 col-sm-6">
                                     <input type="text" class="form-control" placeholder="Zip Code" ng-model="post.location.zip">
@@ -91,19 +96,34 @@
 
         </div>
     </div>
-    <div class="row container" id="partyResults">
-        <div class="col-sm-6 col-md-4" ng-repeat="party in parties | orderBy: 'dateAndTime' track by $index">
+    <div class="row is-flex container" id="partyResults">
+        <div class="col-xs-12 col-sm-12 col-md-6" ng-repeat="party in parties | orderBy: 'dateAndTime' track by $index">
             <div id="indParties">
-                <h3> {{ party.typeOfParty }} Party</h3>
-                <p> {{ party.location.address }} {{ party.location.city }}, {{ party.location.state }}.</p>
-                <p>Alcohol: {{ party.alcohol }} </p>
-                <p>Admission: {{ party.admission }} </p>
-                <p>Posted By: {{ party.personPosting }} </p>
-                <p>Posted By: {{ party.firstName }} </p>
+                <div class="col-xs-6">
+                    <h3> {{ party.typeOfParty }} Party</h3>
+                    <p>Posted by: {{ party.personPosting }} </p>
+                    <p> {{ party.location.address }} {{ party.location.city }}, {{ party.location.state }}.</p>
+                    <p> {{ party.dateAndTime | date: 'short' }} </p>
+                    <p>Alcohol: {{ party.alcohol }} </p>
+                    <p>Admission: ${{ party.admissionAmount }} </p>
+                </div>
+                <div class="col-xs-6" id="commentsCol">
+                    <div class="text-center">
+                        <form>
+                            <textarea class="form-control" ng-model="partyComment"></textarea>
+                            <button type="submit" class="btn btn-primary" ng-model="goingBtn" ng-click="comments(party, partyComment, $index)" ng-disabled="goingBtn"><span ng-hide="goingBtn">Comment</span><span ng-show="goingBtn">Not logged in</span></button>
+                        </form>
+                    </div>
+                    <div id="commentsBox" class="col-xs-12">
+                        <p ng-repeat="comment in party.comments | orderBy: '$index' :true track by $index"> {{ comment }} </p>
+                    </div>
+                    <!--
                 <label>
                     <button class="btn btn-primary" ng-model="goingBtn" ng-click="going(party, userId, $index)" ng-disabled="goingBtn"><span ng-hide="goingBtn">Count Me In </span><span ng-show="goingBtn">Not logged in</span></button>
-                    
+
                 </label>
+-->
+                </div>
             </div>
         </div>
     </div>

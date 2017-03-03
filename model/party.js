@@ -4,10 +4,7 @@ var Schema = mongoose.Schema;
 
 var partySchema = new Schema({
 
-    personPosting: {
-        type: Schema.Types.ObjectId,
-        ref: "User"
-    },
+    personPosting: String,
     host: String,
     typeOfParty: String,
     location: {
@@ -29,10 +26,7 @@ var partySchema = new Schema({
     admission: String,
     admissionAmount: Number,
     dateAndTime: String,
-    peopleGoing: [{
-        type: Schema.Types.ObjectId,
-        ref: "User"
-    }],
+    comments: [String]
 });
 
 module.exports = mongoose.model("Party", partySchema);
