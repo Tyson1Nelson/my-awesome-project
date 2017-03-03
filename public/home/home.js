@@ -7,7 +7,8 @@ angular.module("MyApp")
     var count = 3;
     
     $scope.getUser = function (user) {
-        if (user === undefined) {
+        console.log(user);
+        if (user === undefined || user.username.length === 0) {
             alert("Nothing in the input fields");
         } else {
             PartyService.getUser(user).then(function () {

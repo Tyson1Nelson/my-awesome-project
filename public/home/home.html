@@ -4,14 +4,14 @@
 
 <div class="row container" id="welcomePg">
     <form class="form-group">
-        <div class="col col-xs-12">
-            <input type="text" class="form-control" placeholder="User Name" ng-model="user.username">
+        <div class="col col-xs-12 input-group-lg">
+            <input type="text" class="form-control" placeholder="User Name" ng-model="user.username" ng-minlength="2" required>
         </div>
-        <div class="col col-xs-12">
-            <input type="text" class="form-control" placeholder="Password" ng-model="user.password">
+        <div class="col col-xs-12 input-group-lg">
+            <input type="password" value="text" class="form-control" placeholder="Password" ng-model="user.password" ng-minlength="2" required>
         </div>
         <div class="col col-xs-12 text-center">
-            <button class="btn btn-success" ng-click="getUser(user)" ng-disabled="form">submit</button>
+            <button class="btn btn-success btn-lg" ng-click="getUser(user)" ng-disabled="form">submit</button>
         </div>
     </form>
 </div>

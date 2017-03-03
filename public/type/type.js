@@ -4,7 +4,7 @@ angular.module("MyApp")
 
     $scope.user = PartyService.activeUser;
     $scope.parties = [];
-    $scope.goingBtn = false;
+    $scope.verified = false;
 
     if ($scope.user.length > 0) {
         $scope.userId = $scope.user[0];
@@ -12,20 +12,17 @@ angular.module("MyApp")
     } else {
         $scope.userId = "";
         $scope.loggedIn = false;
-        $scope.goingBtn = true;
+        $scope.verified = true;
     }
 
     $scope.post = {
         personPosting: $scope.userId.firstName,
         typeOfParty: "Other",
-        alcohol: false,
         admissionAmount: 0,
         location: {
             state: "UT"
         }
     };
-    console.log($scope.userId);
-    $scope.partyInput = false;
 
     $scope.comments = function (partyInfo, comments, index) {
         console.log(comments);
