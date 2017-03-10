@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 
 var userSchema = new Schema({
+
     firstName: {
         type: String,
         required: true
@@ -11,25 +12,23 @@ var userSchema = new Schema({
         type: String,
         required: true
     },
-    username: {
+    email: {
         type: String,
         required: true,
-        index: { unique: true }
+        unique: true,
+        lowercase: true
     },
-    password:{
-        type: String,
-    },
-    imgUrl: String,
-    friends: [{
-        type: Schema.Types.ObjectId,
-        ref: "User"
-    }],
-    email: {
+    password: {
         type: String,
         required: true
     },
+    admin: {
+        type: Boolean,
+        default: false
+    },
+    imgUrl: String,
     goingToParties: [String]
-    
+
 });
 
 module.exports = mongoose.model("User", userSchema);

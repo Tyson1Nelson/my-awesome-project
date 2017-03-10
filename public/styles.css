@@ -46,7 +46,7 @@
     font-weight: 700;
     margin-top: 10px;
 }
-input.ng-invalid{
+input.ng-invalid-required {
     border: 1px solid red;
 }
 input.ng-valid:focus {
@@ -101,7 +101,12 @@ body {
     font-family: 'Paytone One', sans-serif;
     /*    height: 100%*/
 }
-
+.navbar {
+    color: black;
+    background-color: #2196F3;
+    border-color: #000000;
+    margin-bottom: 0px;
+}
 html {
     height: 100%;
 }

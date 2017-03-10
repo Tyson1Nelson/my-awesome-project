@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var partySchema = new Schema({
 
-    personPosting: String,
+    personPosting: Object,
     host: String,
     typeOfParty: String,
     location: {

@@ -1,31 +1,32 @@
 angular.module("MyApp")
 
-.service("PartyService", ["$http", function ($http) {
+.service("PartyService", ["$http", "$localStorage", function ($http, $localStorage) {
 
     var self = this;
     var url = "http://localhost:8000";
     var login = "/user/login";
-    var party = "/party/";
-    var boozer = "/boozer";
+    var party = "/api/party/";
     var user = "/user";
     var date = new Date();
 
-    this.activeUser = [];
-
-    this.getUser = function (person) {
-        return $http.get(url + user).then(function (response) {
-            var dataInfo = response.data;
-            dataInfo.forEach(function (data) {
-                if (data.username === person.username && data.password === person.password) {
-                    self.activeUser.splice(0, 1);
-                    self.activeUser.push(data);
-                    return data.username;
-                } else {
-                    return false;
-                }
-            });
-        })
+    this.getUser = function() {
+        return $localStorage.user;
     }
+
+//    this.getUser = function (person) {
+//        return $http.get(url + user).then(function (response) {
+//            var dataInfo = response.data;
+//            dataInfo.forEach(function (data) {
+//                if (data.username === person.username && data.password === person.password) {
+//                    self.activeUser.splice(0, 1);
+//                    self.activeUser.push(data);
+//                    return data.username;
+//                } else {
+//                    return false;
+//                }
+//            });
+//        })
+//    }
     this.getUsers = function () {
         return $http.get(url + user).then(function(response){
             var singleUser = response.data;

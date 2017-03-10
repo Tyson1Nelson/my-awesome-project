@@ -3,13 +3,10 @@
     <div id="addPartyHeader" class="row container-fluid">
 
         <header class="text-center">
-            <h1>Welcome {{ user[0].firstName }}</h1>
+            <h1>Welcome {{ user.firstName }} {{ user.lastName }}</h1>
         </header>
         <div class="col-xs-12 text-center">
-            <div class="col-xs-6" ng-show="verified">
-                <button id="signIn" class="btn btn-success" ng-click="signIn()">Sign In</button>
-            </div>
-            <button class="btn btn-primary" ng-model="addPartyBtn" ng-disabled="!loggedIn" data-toggle="modal" data-target="#myModal">Add A Party</button>
+            <button class="btn btn-primary" ng-model="addPartyBtn" data-toggle="modal" data-target="#myModal">Add A Party</button>
         </div>
     </div>
     <!-- Modal -->
@@ -109,14 +106,15 @@
                     <p> {{ party.location.address }} {{ party.location.city }}, {{ party.location.state }}.</p>
                     <p> {{ party.dateAndTime | date: 'short' }} </p>
                     <p ng-if="party.alcohol === true">Alcohol Present</p>
-                    <p>Admission: ${{ party.admissionAmount }} </p>
-                    <p>Posted by: {{ party.personPosting }} </p>
+                    <p ng-if="party.admissionAmount !== 0">Admission: ${{ party.admissionAmount }} </p>
+                    <p ng-if="party.admissionAmount === 0">Admission: None </p>
+                    <p ng-if="party.personPosting.length !== 0">Posted by: {{ party.personPosting.firstName }}  {{ party.personPosting.lastName }}</p>
                 </div>
                 <div class="col-xs-6" id="commentsCol">
                     <div class="text-center">
                         <form>
-                            <textarea class="form-control" ng-model="partyComment"></textarea>
-                            <button type="button" class="btn btn-primary" ng-model="verified" ng-click="comments(party, partyComment, $index)" ng-disabled="verified"><span ng-hide="verified">Comment</span><span ng-show="verified">Not logged in</span></button>
+                            <textarea class="form-control" ng-model="party.newComment"></textarea>
+                            <button type="button" class="btn btn-primary" ng-model="verified" ng-click="comments(party, $index)">Comment</button>
                         </form>
                     </div>
                     <div id="commentsBox" class="col-xs-12" ng-hide="!party.comments.length">
